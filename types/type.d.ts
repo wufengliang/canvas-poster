@@ -1,35 +1,45 @@
 /*
  * @Author: wufengliang 44823912@qq.com
  * @Date: 2024-01-27 14:02:08
- * @LastEditTime: 2024-01-27 19:08:41
+ * @LastEditTime: 2024-01-29 17:08:07
  * @Description:  类型定义
  */
-export interface ICanvasInstanceOptions {
-    element: HTMLCanvasElement;
-    content: Array<ICanvasItemType>;
-    width: string | number;
-    height: string | number;
-}
+export type AnyObject<T = any> = Record<string | number, T>
 
-export interface ICanvasItemType {
-    type: string;
-    value: ICanvasItemOptions;
+export interface ICanvasInstanceOptions<T = HTMLCanvasElement | WechatMiniprogram.Canvas> {
+    element: T;
+    dataSource: Array<ICanvasItemType>;
+    width: number;
+    height: number;
+    success?: (canvas: T) => void;
 }
 
 export type CanvasItemType = 'image' | 'text';
 
-export interface ICanvasItemOptions<T = string> {
-    width?: number;
-    height?: number;
+export interface ICanvasItemType {
+    type: CanvasItemType;
+    value: ICommmonItemOptions;
+}
+
+export interface ICommmonItemOptions<T = string> {
     value: T;
     fixed?: boolean;
+    x: number;
+    y: number;
+    id?: string;
     parentId?: string;
-    x?: number;
-    y?: number;
-    style?: Record<string, string | number>;
+}
+
+export interface ICanvasImageItemOptions extends ICommmonItemOptions {
+    width: number;
+    height: number;
+    style?: AnyObject<string | number>;
+    r?: number;
+}
+
+export interface ICanvasTextItemOptions extends ICommmonItemOptions {
     fontSize?: number;
     fontFamlily?: string;
     color?: string;
-    r?: number;
-    id?: string;
+    style?: AnyObject;
 }

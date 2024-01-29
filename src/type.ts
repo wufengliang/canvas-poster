@@ -1,7 +1,7 @@
 /*
  * @Author: wufengliang 44823912@qq.com
  * @Date: 2024-01-27 14:02:08
- * @LastEditTime: 2024-01-29 14:06:49
+ * @LastEditTime: 2024-01-29 16:52:06
  * @Description:  类型定义
  */
 export type AnyObject<T = any> = Record<string | number, T>
@@ -9,8 +9,8 @@ export type AnyObject<T = any> = Record<string | number, T>
 export interface ICanvasInstanceOptions<T = HTMLCanvasElement | WechatMiniprogram.Canvas> {
     element: T;
     dataSource: Array<ICanvasItemType>;
-    width: string | number;
-    height: string | number;
+    width: number;
+    height: number;
     success: (canvas: T) => void;
 }
 

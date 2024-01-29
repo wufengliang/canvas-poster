@@ -1,7 +1,7 @@
 /*
  * @Author: wufengliang 44823912@qq.com
  * @Date: 2024-01-27 18:03:58
- * @LastEditTime: 2024-01-29 14:06:54
+ * @LastEditTime: 2024-01-29 16:51:14
  * @Description: 
  */
 import { type ICanvasInstanceOptions, type ICanvasItemType, ICanvasImageItemOptions, ICanvasTextItemOptions } from './type';
@@ -69,8 +69,8 @@ export abstract class BaseCanvasInstance {
      */
     initElement() {
         const { element, width, height } = this.options;
-        element.width = Number(`${width}`);
-        element.height = Number(`${height}`);
+        element.width = width;
+        element.height = height;
         this.render();
     }
 
