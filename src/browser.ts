@@ -1,14 +1,8 @@
 /*
  * @Author: wufengliang 44823912@qq.com
  * @Date: 2024-01-27 18:06:22
- * @LastEditTime: 2024-01-28 00:48:55
- * @Description: 
- */
-/*
- * @Author: wufengliang 44823912@qq.com
- * @Date: 2024-01-27 18:06:22
- * @LastEditTime: 2024-01-27 20:15:47
- * @Description: 
+ * @LastEditTime: 2024-01-29 14:10:07
+ * @Description:  浏览器模式
  */
 import { BaseCanvasInstance } from './base';
 import { ICanvasImageItemOptions, ICanvasInstanceOptions, ICanvasTextItemOptions } from './type';
@@ -45,7 +39,7 @@ export class BrowserCanvasInstance extends BaseCanvasInstance {
 
     drawNormalImage(data: ICanvasImageItemOptions<CanvasImageSource>) {
         const { ctx } = this;
-        const { x, y, width, height, value, id } = data;
+        const { x, y, width, height, value } = data;
         ctx.save();
         ctx.beginPath();
         ctx.drawImage(value, x, y, width, height);

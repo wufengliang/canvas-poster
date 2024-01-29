@@ -1,10 +1,10 @@
 /*
  * @Author: wufengliang 44823912@qq.com
  * @Date: 2024-01-27 18:03:58
- * @LastEditTime: 2024-01-28 00:49:29
+ * @LastEditTime: 2024-01-29 14:06:54
  * @Description: 
  */
-import { type ICanvasInstanceOptions, type ICanvasItemType, type ICommmonItemOptions, CanvasItemType, ICanvasImageItemOptions, ICanvasTextItemOptions } from './type';
+import { type ICanvasInstanceOptions, type ICanvasItemType, ICanvasImageItemOptions, ICanvasTextItemOptions } from './type';
 
 export abstract class BaseCanvasInstance {
 

@@ -1,16 +1,17 @@
 /*
  * @Author: wufengliang 44823912@qq.com
  * @Date: 2024-01-27 14:02:08
- * @LastEditTime: 2024-01-28 00:44:52
+ * @LastEditTime: 2024-01-29 14:06:49
  * @Description:  类型定义
  */
+export type AnyObject<T = any> = Record<string | number, T>
 
-export interface ICanvasInstanceOptions {
-    element: HTMLCanvasElement | WechatMiniprogram.Canvas;
+export interface ICanvasInstanceOptions<T = HTMLCanvasElement | WechatMiniprogram.Canvas> {
+    element: T;
     dataSource: Array<ICanvasItemType>;
     width: string | number;
     height: string | number;
-    success: (canvas: HTMLCanvasElement | WechatMiniprogram.Canvas) => void;
+    success: (canvas: T) => void;
 }
 
 export type CanvasItemType = 'image' | 'text';
@@ -29,10 +30,10 @@ export interface ICommmonItemOptions<T = string> {
     parentId?: string;
 }
 
-export interface ICanvasImageItemOptions<T = string> extends ICommmonItemOptions<T> {
+export interface ICanvasImageItemOptions<T = string> extends ICommmonItemOptions {
     width: number;
     height: number;
-    style?: Record<string, string | number>;
+    style?: AnyObject<string | number>;
     r?: number;
 }
 
@@ -40,5 +41,5 @@ export interface ICanvasTextItemOptions extends ICommmonItemOptions {
     fontSize?: number;
     fontFamlily?: string;
     color?: string;
-    style?: Record<string, any>;
+    style?: AnyObject;
 }

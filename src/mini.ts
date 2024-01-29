@@ -1,9 +1,10 @@
 import { BaseCanvasInstance } from './base';
-import type { ICanvasImageItemOptions, ICanvasInstanceOptions, ICanvasTextItemOptions } from './type';
+import type { ICanvasImageItemOptions, ICanvasInstanceOptions, ICanvasTextItemOptions, AnyObject } from './type';
 
 export class MiniCanvasInstance extends BaseCanvasInstance {
-    options: ICanvasInstanceOptions;
-    constructor(options: ICanvasInstanceOptions) {
+    options: ICanvasInstanceOptions<WechatMiniprogram.Canvas>;
+
+    constructor(options: ICanvasInstanceOptions<WechatMiniprogram.Canvas>) {
         super(options);
     }
 
@@ -20,7 +21,7 @@ export class MiniCanvasInstance extends BaseCanvasInstance {
     async getRenderImageInstance(url: string) {
         const { element } = this.options;
         return new Promise((resolve) => {
-            const image = (element as unknown as WechatMiniprogram.Canvas).createImage();
+            const image = element.createImage();
             image.src = url;
             image.onload = () => resolve(image);
         })
@@ -59,7 +60,7 @@ export class MiniCanvasInstance extends BaseCanvasInstance {
 
         for (let key in style) {
             if (key in ctx) {
-                (ctx as unknown as Record<string, any>)[key] = style[key];
+                (ctx as unknown as AnyObject)[key] = style[key];
             }
         }
         return { ...value, fontSize, fontFamlily, color, style }
