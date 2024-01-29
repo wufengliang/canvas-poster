@@ -24,7 +24,7 @@
 | type | `CanvasItemType` | `渲染节点类型` | `是` | `-`
 | value | `ICommmonItemOptions` | `渲染节点数据` | `是` | `-`
 
-##### `ICommmonItemOptions<T>`类型
+##### `ICommmonItemOptions<T=string>`类型
 | 字段 | 类型 | 说明 | 是否必填 | 默认值
 | - | - | - | - | -
 | value | `T` | `节点数据` | `是` | `-`
