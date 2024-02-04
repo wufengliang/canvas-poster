@@ -14,15 +14,17 @@
 | width | `Number` | `canvas节点高度` | `是` | `-` |
 | success | `(canvas:HTMLCanvasElement \| WechatMiniprogram.Canvas) => void` | `canvas绘制成功回调` | `-` | `-`
 
-##### `CanvasItemType` 枚举类型
-- `image`   图片类型
-- `text`    文本类型
 
 ##### `ICanvasItemType`类型
 | 字段 | 类型 | 说明 | 是否必填 | 默认值
 | - | - | - | - | -
 | type | `CanvasItemType` | `渲染节点类型` | `是` | `-`
 | value | `ICommmonItemOptions` | `渲染节点数据` | `是` | `-`
+
+##### `CanvasItemType` 枚举类型
+- `image`   图片类型
+- `text`    文本类型
+
 
 ##### `ICommmonItemOptions<T=string>`类型
 | 字段 | 类型 | 说明 | 是否必填 | 默认值
@@ -33,6 +35,13 @@
 | y | `number` | `y轴上坐标` | `是` | `0`
 | id | `string` | `渲染节点id标识符` | `-` | `数据对应索引值+1`
 | parentId | `string` | `渲染节点的父级节点id标识符` | `-` | `-`
+| position | `TPositionType` | `基于父级节点的定位起始位置` | `-` | `topLeft`
+
+##### `TPositionType`枚举类型
+-   `topLeft` 左上角
+-   `topRight` 右上角
+-   `bottomLeft` 左下角
+-   `bottomRight`右下角
 
 
 ##### `ICanvasImageItemOptions<T>`，继承自`ICommmonItemOptions<T>`

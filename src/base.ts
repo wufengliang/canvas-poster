@@ -1,14 +1,14 @@
 /*
  * @Author: wufengliang 44823912@qq.com
  * @Date: 2024-01-27 18:03:58
- * @LastEditTime: 2024-01-29 16:51:14
- * @Description: 
+ * @LastEditTime: 2024-02-04 10:50:39
+ * @Description: 基类实现
  */
-import { type ICanvasInstanceOptions, type ICanvasItemType, ICanvasImageItemOptions, ICanvasTextItemOptions } from './type';
+import { type ICanvasInstanceOptions, type ICanvasItemType, ICanvasImageItemOptions, ICanvasTextItemOptions, TCanvasType } from './type';
 
-export abstract class BaseCanvasInstance {
+export abstract class BaseCanvasInstance<T extends ICanvasInstanceOptions<TCanvasType> = ICanvasInstanceOptions<TCanvasType>> {
 
-    options: ICanvasInstanceOptions;
+    options: T;
     context?: CanvasRenderingContext2D;
 
     /**
@@ -22,7 +22,7 @@ export abstract class BaseCanvasInstance {
      */
     defaultFontFamlily: string = 'sans-serif';
 
-    constructor(options: ICanvasInstanceOptions) {
+    constructor(options: T) {
         this.options = options;
         this.init();
     }
@@ -101,7 +101,7 @@ export abstract class BaseCanvasInstance {
         const newValue = { ...value, x, y, fixed, parentId, id }
         switch (type) {
             case 'image':
-                await this.renderImage(newValue as ICanvasImageItemOptions);
+                await this.renderImage(newValue as ICanvasImageItemOptions<string>);
                 break;
             case 'text':
                 await this.renderText(newValue as ICanvasTextItemOptions);
@@ -114,7 +114,7 @@ export abstract class BaseCanvasInstance {
     /**
      * 渲染图片
      */
-    async renderImage(data: ICanvasImageItemOptions) {
+    async renderImage(data: ICanvasImageItemOptions<string>) {
         const { r = 0, width, height, id, x, y } = data;
 
         if (r > 0 && (r !== width / 2 || r !== height / 2)) {
@@ -146,15 +146,33 @@ export abstract class BaseCanvasInstance {
     /**
      * 获取canvas绘制图片的实例对象
      */
-    abstract getRenderImageInstance(url: string): Promise<any>
+    abstract getRenderImageInstance(url: string): Promise<CanvasImageSource | WechatMiniprogram.Image>
 
     /**
      * 绘制图片圆形
      */
-    abstract drawCircleImage(data: ICanvasImageItemOptions<CanvasImageSource>): void;
+    drawCircleImage(data: ICanvasImageItemOptions<CanvasImageSource | WechatMiniprogram.Image>): void {
+        const { ctx } = this;
+        const { x, y, width, height, value, id } = data;
+        const centerX = x + width / 2, centerY = y + height / 2;
+        const radius = Math.min(centerX, centerY);
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+        ctx.clip();
+        ctx.drawImage(value, centerX - radius, centerY - radius, radius * 2, radius * 2);
+        ctx.restore();
+    }
 
     /**
      * 绘制常规图片
      */
-    abstract drawNormalImage(data: ICanvasImageItemOptions<CanvasImageSource>): void;
+    drawNormalImage(data: ICanvasImageItemOptions<CanvasImageSource | WechatMiniprogram.Image>): void {
+        const { ctx } = this;
+        const { x, y, width, height, value, id } = data;
+        ctx.save();
+        ctx.beginPath();
+        ctx.drawImage(value, x, y, width, height);
+        ctx.restore();
+    }
 }
