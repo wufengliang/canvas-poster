@@ -1,7 +1,7 @@
 /*
  * @Author: wufengliang 44823912@qq.com
  * @Date: 2024-01-27 18:03:58
- * @LastEditTime: 2024-02-04 10:50:39
+ * @LastEditTime: 2024-02-04 11:33:23
  * @Description: 基类实现
  */
 import { type ICanvasInstanceOptions, type ICanvasItemType, ICanvasImageItemOptions, ICanvasTextItemOptions, TCanvasType } from './type';
@@ -21,6 +21,11 @@ export abstract class BaseCanvasInstance<T extends ICanvasInstanceOptions<TCanva
      * canvas渲染文字默认字体
      */
     defaultFontFamlily: string = 'sans-serif';
+
+    /**
+     * canvas渲染默认颜色
+     */
+    defaultColor: string = '#000';
 
     constructor(options: T) {
         this.options = options;
@@ -131,7 +136,7 @@ export abstract class BaseCanvasInstance<T extends ICanvasInstanceOptions<TCanva
      */
     async renderText(data: ICanvasTextItemOptions) {
         const { ctx, defaultFontFamlily } = this;
-        const { fontSize = 12, fontFamlily = defaultFontFamlily, color = '#000', style = {}, value, x, y, id } = data;
+        const { fontSize = 12, fontFamlily = defaultFontFamlily, value, x, y, id } = data;
         const newData = this.setTextStyle({ ...data, fontSize, fontFamlily })
         const newY = y + newData.fontSize!;
         ctx.fillText(value, x, newY);

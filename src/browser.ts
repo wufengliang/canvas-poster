@@ -1,11 +1,11 @@
 /*
  * @Author: wufengliang 44823912@qq.com
  * @Date: 2024-01-27 18:06:22
- * @LastEditTime: 2024-02-04 10:50:22
+ * @LastEditTime: 2024-02-04 11:33:39
  * @Description:  浏览器模式
  */
 import { BaseCanvasInstance } from './base';
-import { ICanvasImageItemOptions, ICanvasInstanceOptions, ICanvasTextItemOptions } from './type';
+import { ICanvasInstanceOptions, ICanvasTextItemOptions } from './type';
 
 export class BrowserCanvasInstance extends BaseCanvasInstance {
     constructor(options: ICanvasInstanceOptions) {
@@ -28,8 +28,8 @@ export class BrowserCanvasInstance extends BaseCanvasInstance {
      * 设置渲染文字字体
      */
     setTextStyle(value: ICanvasTextItemOptions): ICanvasTextItemOptions {
-        const { ctx, defaultFontFamlily } = this;
-        const { fontSize = 12, fontFamlily = defaultFontFamlily, color = '#000', style = {} } = value;
+        const { ctx, defaultFontFamlily, defaultColor } = this;
+        const { fontSize = 12, fontFamlily = defaultFontFamlily, color = defaultColor, style = {} } = value;
         ctx.font = `${fontSize}px ${fontFamlily}`;
         ctx.fillStyle = color;
 
