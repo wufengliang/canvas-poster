@@ -1,13 +1,17 @@
 /*
  * @Author: wufengliang 44823912@qq.com
  * @Date: 2024-01-27 22:53:31
- * @LastEditTime: 2024-01-29 11:50:55
+ * @LastEditTime: 2024-02-04 15:23:48
  * @Description: rollup配置
  */
 const typescript = require('rollup-plugin-typescript2');
 const { terser } = require('rollup-plugin-terser');
 
-const inputs = [{ input: 'src/browser.ts', outputName: 'canvas-poster.browser.min' }, { input: 'src/mini.ts', outputName: 'canvas-poster.mini.min' }];
+const inputs = [
+  { input: 'src/browser.ts', outputName: 'canvas-poster.browser' },
+  { input: 'src/mini.ts', outputName: 'canvas-poster.mini' },
+  { input: 'src/index.ts', outputName: 'canvas-poster.umd' }
+];
 
 const globals = {};
 
@@ -60,6 +64,8 @@ function renderSingleOptions(input, outputName) {
             compilerOptions: {
               target: 'es6',
               module: 'ESNext',
+              declaration:true,
+              outDir:'ts',
             },
           },
         }),
